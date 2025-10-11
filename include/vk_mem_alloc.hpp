@@ -154,7 +154,10 @@ throwResultException(VULKAN_HPP_NAMESPACE::Result result, char const *message) {
   case Result::eErrorIncompatibleDisplayKHR:
     throw VULKAN_HPP_NAMESPACE::IncompatibleDisplayKHRError(message);
   case Result::eErrorValidationFailedEXT:
-    throw VULKAN_HPP_NAMESPACE::ValidationFailedEXTError(message);
+    // Make VMA-HPP compile for now. Waiting for version 3.3.0
+    // throw VULKAN_HPP_NAMESPACE::ValidationFailedEXTError(message);
+    throw VULKAN_HPP_NAMESPACE::SystemError(
+      VULKAN_HPP_NAMESPACE::make_error_code(result), message);
   case Result::eErrorInvalidShaderNV:
     throw VULKAN_HPP_NAMESPACE::InvalidShaderNVError(message);
   case Result::eErrorImageUsageNotSupportedKHR:
